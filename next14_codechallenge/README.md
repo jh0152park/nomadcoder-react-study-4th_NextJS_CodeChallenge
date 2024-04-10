@@ -16,3 +16,5 @@ nomadcoder-react-study-4th_Schema Practice
 
 -   using react-hook-form
 -   make a login form for "name" + "email" + "password"
+
+https://github.com/jh0152park/nomadcoder-react-study-4th_NextJS_CodeChallenge/assets/118165975/25548f50-4a24-429e-93e1-0b5d42dcee37
