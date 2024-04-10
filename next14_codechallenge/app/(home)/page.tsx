@@ -48,9 +48,10 @@ export default function Home() {
                         <input
                             className="w-full h-10 px-2 rounded-2xl bg-inherit focus:outline-none ring-1 focus:ring-4 ring-neutral-200 focus:ring-green-500 placeholder:text-neutral-400"
                             type="text"
-                            required
                             placeholder="write your name"
-                            {...register("name", { required: true })}
+                            {...register("name", {
+                                required: "Please write down your name",
+                            })}
                         />
                         <span className="-mt-1 text-sm text-red-400">
                             {watch("name") === ""
@@ -64,10 +65,9 @@ export default function Home() {
                         <input
                             className="w-full h-10 px-2 rounded-2xl bg-inherit focus:outline-none ring-1 focus:ring-4 ring-neutral-200 focus:ring-green-500 placeholder:text-neutral-400"
                             type="email"
-                            required
                             placeholder="Only @namver.com"
                             {...register("email", {
-                                required: true,
+                                required: "Please write down your email",
                                 validate: {
                                     isNaver: (value) =>
                                         value.includes("@naver.com") ||
@@ -89,10 +89,9 @@ export default function Home() {
                         <input
                             className="w-full h-10 px-2 rounded-2xl bg-inherit focus:outline-none ring-1 focus:ring-4 ring-neutral-200 focus:ring-green-500 placeholder:text-neutral-400"
                             type="password"
-                            required
                             placeholder="Min 10 characters"
                             {...register("password", {
-                                required: true,
+                                required: "Please write down your password",
                                 minLength: {
                                     value: 10,
                                     message:
