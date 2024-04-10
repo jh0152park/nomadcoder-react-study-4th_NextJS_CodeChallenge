@@ -9,3 +9,10 @@ nomadcoder-react-study-4th_Schema Practice
 -   UML diagrams is how we design and plan the structures of a system and how they are related to each other.
 
 ![alt text](image.png)
+
+---
+
+# Extra Requirements
+
+-   using react-hook-form
+-   make a login form for "name" + "email" + "password"
