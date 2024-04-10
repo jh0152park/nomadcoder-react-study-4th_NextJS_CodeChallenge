@@ -8,7 +8,7 @@ nomadcoder-react-study-4th_Schema Practice
 -   Your job today is to translate the following UML class diagram into Prisma models.
 -   UML diagrams is how we design and plan the structures of a system and how they are related to each other.
 
-![alt text](image.png)
+[![alt text](image.png)](https://github.com/jh0152park/nomadcoder-react-study-4th_NextJS_CodeChallenge/raw/main/image.png)
 
 ---
 
