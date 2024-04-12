@@ -21,7 +21,7 @@ https://github.com/jh0152park/nomadcoder-react-study-4th_NextJS_CodeChallenge/as
 
 ---
 
-# Extra
+# Extra Challenge
 
 
 https://github.com/jh0152park/nomadcoder-react-study-4th_NextJS_CodeChallenge/assets/118165975/515eb2e9-8f8e-41fa-bcd1-4203b1d33141
