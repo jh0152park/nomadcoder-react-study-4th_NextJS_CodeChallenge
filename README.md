@@ -19,3 +19,10 @@ nomadcoder-react-study-4th_Schema Practice
 
 https://github.com/jh0152park/nomadcoder-react-study-4th_NextJS_CodeChallenge/assets/118165975/25548f50-4a24-429e-93e1-0b5d42dcee37
 
+---
+
+# Extra
+
+
+https://github.com/jh0152park/nomadcoder-react-study-4th_NextJS_CodeChallenge/assets/118165975/515eb2e9-8f8e-41fa-bcd1-4203b1d33141
+
