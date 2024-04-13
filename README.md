@@ -12,7 +12,7 @@ nomadcoder-react-study-4th_Schema Practice
 
 ---
 
-# Extra Requirements
+# Extra Requirement
 
 -   using react-hook-form
 -   make a login form for "name" + "email" + "password"
