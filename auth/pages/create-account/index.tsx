@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 
 interface ICreateAccountForm {
     username: string;
@@ -10,10 +10,15 @@ interface ICreateAccountForm {
 export default function CreateAccount() {
     const { register, watch, handleSubmit } = useForm<ICreateAccountForm>();
 
-    console.log(watch());
+    function onSubmit(data: FieldValues) {
+        console.log(data);
+    }
 
     return (
-        <form className="flex flex-col w-[350px] h-[300px] bg-[#c0c0c0] border-2 border-r-black border-b-black">
+        <form
+            className="flex flex-col w-[350px] h-[300px] bg-[#c0c0c0] border-2 border-r-black border-b-black"
+            onSubmit={handleSubmit(onSubmit)}
+        >
             <div className="w-full h-[30px] bg-gradient-to-r from-[#0a246d] to-[#a1c9f3] flex items-center justify-start px-5 font-semibold">
                 Create Account
             </div>
