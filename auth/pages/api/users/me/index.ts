@@ -1,6 +1,7 @@
 import client from "@/lib/prismaClient";
 import { getIronSession } from "iron-session";
 import { NextApiRequest, NextApiResponse } from "next";
+import { redirect } from "next/navigation";
 
 interface IResponse {
     isSuccess: boolean;
@@ -17,12 +18,22 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<IResponse>
 ) {
-    console.log("Here is api user me!");
-
     const session = await getIronSession<ISessionForm>(req, res, {
         cookieName: "registered-user",
         password: process.env.COOKEI_PASSWORD!,
     });
+
+    console.log("session");
+    console.log(session);
+
+    if (!session.id) {
+        console.log("can not find login session");
+
+        return res.status(401).json({
+            isSuccess: false,
+            message: "Login is required",
+        });
+    }
 
     const profile = await client.user.findUnique({
         where: {
@@ -35,16 +46,8 @@ export default async function handler(
         },
     });
 
-    console.log("Hit the /api/users/me");
     console.log(`session id: ${session.id}`);
     console.log(`profile id: ${profile?.id}`);
-
-    if (!session.id) {
-        return res.status(401).json({
-            isSuccess: false,
-            message: "Login is required",
-        });
-    }
 
     if (!profile) {
         return res.status(400).json({
@@ -59,8 +62,4 @@ export default async function handler(
             profile,
         });
     }
-
-    return res.json({
-        isSuccess: false,
-    });
 }

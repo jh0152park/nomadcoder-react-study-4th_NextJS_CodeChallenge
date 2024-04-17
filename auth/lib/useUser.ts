@@ -12,11 +12,15 @@ export default function useUser() {
     const router = useRouter();
     const { data, error } = useSWR<IResponse>("/api/users/me");
 
+    console.log(data);
+
     useEffect(() => {
         if (data && !data.isSuccess) {
             // something went wrong
-            alert("something went wrong, please try again or sign up");
-            router.replace("/login");
+            alert(
+                "something went wrong, please try login again or sign up first"
+            );
+            router.replace("/create-account");
         }
     }, [data, router]);
 

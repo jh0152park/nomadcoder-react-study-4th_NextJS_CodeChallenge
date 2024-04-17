@@ -30,7 +30,7 @@ export default function Login() {
 
     useEffect(() => {
         if (data?.isSuccess) {
-            router.push("/");
+            router.push("/home");
         } else if (data?.isSuccess === false) {
             alert("Please check your email or password");
         }
