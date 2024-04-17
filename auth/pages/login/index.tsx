@@ -60,7 +60,7 @@ export default function Login() {
                     type="submit"
                     className=" border-b-black border-r-black mt-3 border-2 w-full h-[35px] flex justify-center items-center text-black font-semibold hover:cursor-pointer active:border-l-black active:border-t-black active:border-r-gray-300 active:border-b-gray-300 "
                 >
-                    Login
+                    Log in
                 </button>
             </div>
         </form>
