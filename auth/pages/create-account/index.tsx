@@ -18,8 +18,9 @@ interface IMutationResult {
 export default function CreateAccount() {
     const { register, reset, handleSubmit } = useForm<ICreateAccountForm>();
 
-    const [signUp, { loading, data, error }] =
-        useMutation<IMutationResult>("api/users/register");
+    const [signUp, { loading, data, error }] = useMutation<IMutationResult>(
+        "/api/users/register"
+    );
 
     const router = useRouter();
 

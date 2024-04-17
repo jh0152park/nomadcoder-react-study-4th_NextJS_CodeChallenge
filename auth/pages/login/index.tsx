@@ -18,7 +18,7 @@ export default function Login() {
     const { register, reset, handleSubmit } = useForm<ILoginForm>();
 
     const [signIn, { loading, data, error }] =
-        useMutation<IMutationResult>("api/users/login");
+        useMutation<IMutationResult>("/api/users/login");
 
     const router = useRouter();
 
