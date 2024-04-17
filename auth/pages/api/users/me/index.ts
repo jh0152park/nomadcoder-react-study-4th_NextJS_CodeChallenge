@@ -7,7 +7,8 @@ interface IResponse {
 }
 
 async function handler(req: NextApiRequest, res: NextApiResponse<IResponse>) {
-    // if (req.method === "GET") {
-    //     const profile = await client
-    // }
+    if (req.method === "GET") {
+        // const profile = await client.user.findUnique({
+        // })
+    }
 }

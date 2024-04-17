@@ -1,8 +1,19 @@
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+
+interface ICreateAccountForm {
+    username: string;
+    email: string;
+    password: string;
+}
 
 export default function CreateAccount() {
+    const { register, watch, handleSubmit } = useForm<ICreateAccountForm>();
+
+    console.log(watch());
+
     return (
-        <div className="flex flex-col w-[350px] h-[300px] bg-[#c0c0c0] border-2 border-r-black border-b-black">
+        <form className="flex flex-col w-[350px] h-[300px] bg-[#c0c0c0] border-2 border-r-black border-b-black">
             <div className="w-full h-[30px] bg-gradient-to-r from-[#0a246d] to-[#a1c9f3] flex items-center justify-start px-5 font-semibold">
                 Create Account
             </div>
@@ -18,8 +29,9 @@ export default function CreateAccount() {
                         <span>Username</span>
                     </div>
                     <input
-                        className="w-full text-black border-2 border-l-gray-500 border-t-gray-500 border-r-gray-300 border-b-gray-300 placeholder:text-black focus:outline-none"
+                        className="w-full px-2 text-black border-2 border-l-gray-500 border-t-gray-500 border-r-gray-300 border-b-gray-300 placeholder:text-black focus:outline-none"
                         type="text"
+                        {...register("username", { required: true })}
                     />
                 </div>
 
@@ -34,8 +46,9 @@ export default function CreateAccount() {
                         <span>Email</span>
                     </div>
                     <input
-                        className="w-full text-black border-2 border-l-gray-500 border-t-gray-500 border-r-gray-300 border-b-gray-300 placeholder:text-black focus:outline-none"
+                        className="w-full px-2 text-black border-2 border-l-gray-500 border-t-gray-500 border-r-gray-300 border-b-gray-300 placeholder:text-black focus:outline-none"
                         type="email"
+                        {...register("email", { required: true })}
                     />
                 </div>
 
@@ -50,15 +63,19 @@ export default function CreateAccount() {
                         <span>Password</span>
                     </div>
                     <input
-                        className="w-full text-black border-2 border-l-gray-500 border-t-gray-500 border-r-gray-300 border-b-gray-300 placeholder:text-black focus:outline-none"
+                        className="w-full px-2 text-black border-2 border-l-gray-500 border-t-gray-500 border-r-gray-300 border-b-gray-300 placeholder:text-black focus:outline-none"
                         type="password"
+                        {...register("password", { required: true })}
                     />
                 </div>
 
-                <div className=" border-b-black border-r-black mt-3 border-2 w-full h-[35px] flex justify-center items-center text-black font-semibold hover:cursor-pointer active:border-l-black active:border-t-black active:border-r-gray-300 active:border-b-gray-300 ">
+                <button
+                    type="submit"
+                    className=" border-b-black border-r-black mt-3 border-2 w-full h-[35px] flex justify-center items-center text-black font-semibold hover:cursor-pointer active:border-l-black active:border-t-black active:border-r-gray-300 active:border-b-gray-300 "
+                >
                     Sign up for free
-                </div>
+                </button>
             </div>
-        </div>
+        </form>
     );
 }
