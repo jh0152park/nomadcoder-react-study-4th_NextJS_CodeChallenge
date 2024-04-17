@@ -1,3 +1,4 @@
+import useMutation from "@/lib/useMutation";
 import Image from "next/image";
 import { FieldValues, useForm } from "react-hook-form";
 
@@ -7,11 +8,18 @@ interface ICreateAccountForm {
     password: string;
 }
 
+interface IMutationResult {
+    isSuccess: boolean;
+}
+
 export default function CreateAccount() {
     const { register, watch, handleSubmit } = useForm<ICreateAccountForm>();
+    const [signUp, { loading, data, error }] =
+        useMutation<IMutationResult>("api/users/register");
 
     function onSubmit(data: FieldValues) {
         console.log(data);
+        signUp(data);
     }
 
     return (
