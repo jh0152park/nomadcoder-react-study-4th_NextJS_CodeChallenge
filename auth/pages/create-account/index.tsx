@@ -1,5 +1,7 @@
 import useMutation from "@/lib/useMutation";
 import Image from "next/image";
+import { redirect, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 
 interface ICreateAccountForm {
@@ -13,14 +15,31 @@ interface IMutationResult {
 }
 
 export default function CreateAccount() {
-    const { register, watch, handleSubmit } = useForm<ICreateAccountForm>();
+    const { register, reset, handleSubmit } = useForm<ICreateAccountForm>();
     const [signUp, { loading, data, error }] =
         useMutation<IMutationResult>("api/users/register");
+    const router = useRouter();
 
-    function onSubmit(data: FieldValues) {
-        console.log(data);
-        signUp(data);
+    function onSubmit(formData: FieldValues) {
+        if (loading) return;
+
+        signUp(formData);
     }
+
+    useEffect(() => {
+        console.log(data);
+
+        if (data?.isSuccess) {
+            if (
+                confirm("Created a new accout was success! Please try log in!")
+            ) {
+                reset();
+                router.push("/login");
+            }
+        } else if (data?.isSuccess === false) {
+            alert("Something went wrong! Please try again");
+        }
+    }, [data, router]);
 
     return (
         <form

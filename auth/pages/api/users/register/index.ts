@@ -24,11 +24,15 @@ async function Handler(req: NextApiRequest, res: NextApiResponse<IResponse>) {
         },
     });
 
-    console.log(user);
-
-    return res.json({
-        isSuccess: true,
-    });
+    if (user) {
+        return res.json({
+            isSuccess: true,
+        });
+    } else {
+        return res.json({
+            isSuccess: false,
+        });
+    }
 }
 
 export default withHandler({
