@@ -1,4 +1,7 @@
+import useMutation from "@/lib/useMutation";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 
 interface ILoginForm {
@@ -6,12 +9,32 @@ interface ILoginForm {
     password: string;
 }
 
-export default function Login() {
-    const { register, watch, handleSubmit } = useForm<ILoginForm>();
+interface IMutationResult {
+    isSuccess: boolean;
+    [key: string]: any;
+}
 
-    function onSubmit(data: FieldValues) {
-        console.log(data);
+export default function Login() {
+    const { register, reset, handleSubmit } = useForm<ILoginForm>();
+
+    const [signIn, { loading, data, error }] =
+        useMutation<IMutationResult>("api/users/login");
+
+    const router = useRouter();
+
+    function onSubmit(formData: FieldValues) {
+        if (loading) return;
+
+        signIn(formData);
     }
+
+    useEffect(() => {
+        if (data?.isSuccess) {
+            router.push("/");
+        } else if (data?.isSuccess === false) {
+            alert("Please check your email or password");
+        }
+    }, [data, router]);
 
     return (
         <form

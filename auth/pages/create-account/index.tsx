@@ -12,12 +12,15 @@ interface ICreateAccountForm {
 
 interface IMutationResult {
     isSuccess: boolean;
+    [key: string]: any;
 }
 
 export default function CreateAccount() {
     const { register, reset, handleSubmit } = useForm<ICreateAccountForm>();
+
     const [signUp, { loading, data, error }] =
         useMutation<IMutationResult>("api/users/register");
+
     const router = useRouter();
 
     function onSubmit(formData: FieldValues) {
@@ -27,7 +30,7 @@ export default function CreateAccount() {
     }
 
     useEffect(() => {
-        console.log(data);
+        // console.log(data);
 
         if (data?.isSuccess) {
             if (

@@ -1,6 +1,7 @@
-import withHandler from "@/lib/withHandler";
-import { NextApiRequest, NextApiResponse } from "next";
 import client from "@/lib/prismaClient";
+import withHandler from "@/lib/withHandler";
+import { getIronSession } from "iron-session";
+import { NextApiRequest, NextApiResponse } from "next";
 
 interface IResponse {
     isSuccess: boolean;
@@ -8,19 +9,12 @@ interface IResponse {
 }
 
 async function Handler(req: NextApiRequest, res: NextApiResponse<IResponse>) {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await client.user.upsert({
+    const user = await client.user.findUnique({
         where: {
             email: email,
-        },
-        create: {
-            username: username,
-            email: email,
             password: password,
-        },
-        update: {
-            // nothing to do
         },
         select: {
             id: true,
@@ -30,9 +24,21 @@ async function Handler(req: NextApiRequest, res: NextApiResponse<IResponse>) {
     });
 
     if (user) {
+        const cookie = await getIronSession(req, res, {
+            cookieName: "registered-user",
+            password: process.env.COOKEI_PASSWORD!,
+        });
+        //@ts-ignore
+        cookie.id = user.id;
+        //@ts-ignore
+        cookie.email = user.email;
+        //@ts-ignore
+        cookie.username = user.username;
+
+        await cookie.save();
+
         return res.json({
             isSuccess: true,
-            user: user,
         });
     } else {
         return res.json({
