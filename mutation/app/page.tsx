@@ -8,7 +8,10 @@ async function fetcher() {
 }
 
 export default function Home() {
-    const { data, mutate } = useSWR("dog_video", fetcher);
+    const { data, mutate } = useSWR("dog_video", fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+    });
 
     function onDogClick() {
         mutate();
