@@ -2,11 +2,6 @@
 
 import useSWR from "swr";
 
-interface IResponse {
-    url: string;
-    isLiked: boolean;
-}
-
 async function fetcher() {
     const API_URL = "https://dogs-api.nomadcoders.workers.dev";
     return fetch(API_URL).then((res) => res.json());
