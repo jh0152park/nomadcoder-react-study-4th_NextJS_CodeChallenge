@@ -8,7 +8,7 @@ export default function BackButton() {
 
     return (
         <ChevronLeftIcon
-            className="size-7 hover:cursor-pointer"
+            className="-ml-2 size-7 hover:cursor-pointer"
             onClick={() => {
                 router.back();
             }}
