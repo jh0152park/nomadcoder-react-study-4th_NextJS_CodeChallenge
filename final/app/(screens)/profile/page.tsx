@@ -2,6 +2,7 @@ import Image from "next/image";
 import BackButton from "@/components/profile/back-button";
 import getSession from "@/lib/session/get-session";
 import PRISMA_DB from "@/lib/db/prisma-db";
+import Link from "next/link";
 
 export default async function Profile() {
     const session = await getSession();
@@ -44,9 +45,12 @@ export default async function Profile() {
                     {user?.description}
                 </span>
 
-                <button className="w-full mt-5  py-1.5 border rounded-lg border-neutral-500 hover:bg-neutral-950 transition-all">
+                <Link
+                    href="/profile/edit"
+                    className="w-full mt-5  py-1.5 border rounded-lg border-neutral-500 hover:bg-neutral-950 transition-all text-center"
+                >
                     Edit profile
-                </button>
+                </Link>
             </div>
 
             <div className="w-full pb-2 mt-12 text-center border-b-2 border-neutral-500">
