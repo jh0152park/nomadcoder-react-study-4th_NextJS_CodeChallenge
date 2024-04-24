@@ -18,7 +18,7 @@ export default function Home() {
             <div className="absolute flex flex-col items-center justify-center gap-2 bottom-7">
                 <Link
                     href="/create-account"
-                    className="text-black font-bold text-lg py-2 w-[350px] bg-[ghostwhite] rounded-xl hover:bg-neutral-300 transition-all text-center"
+                    className="text-black font-semibold text-lg py-2 w-[350px] bg-[ghostwhite] rounded-xl hover:bg-neutral-300 transition-all text-center"
                 >
                     Start
                 </Link>
