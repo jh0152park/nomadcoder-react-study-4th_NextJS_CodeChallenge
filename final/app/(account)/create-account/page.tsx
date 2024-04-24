@@ -10,7 +10,7 @@ export default function CreateAccountPage() {
     const [state, trigger] = useFormState(CreateAccount, null);
 
     return (
-        <div className="flex flex-col items-center justify-start w-full h-full gap-10 px-10">
+        <div className="flex flex-col items-center justify-start w-full h-full px-10">
             <Image
                 src="/image/logo.png"
                 alt="logo"
@@ -22,6 +22,8 @@ export default function CreateAccountPage() {
                     height: "auto",
                 }}
             />
+
+            <span className="font-bold text-2xl mb-10">Create Account</span>
 
             <form action={trigger} className="flex flex-col gap-3 ">
                 <Input
@@ -47,7 +49,7 @@ export default function CreateAccountPage() {
                 />
                 <LoadingButton name="Create" />
             </form>
-            <span className="text-sm text-center w-full -mt-6">
+            <span className="text-sm text-center w-full mt-2">
                 Will be redirect to login page if account created 😎
             </span>
         </div>
