@@ -1,9 +1,9 @@
 "use server";
 
+import { z } from "zod";
+import { redirect } from "next/navigation";
 import PRISMA_DB from "@/lib/db/prisma-db";
 import UpdateSession from "@/lib/session/update-session";
-import { redirect } from "next/navigation";
-import { z } from "zod";
 
 const formSchema = z.object({
     email: z
