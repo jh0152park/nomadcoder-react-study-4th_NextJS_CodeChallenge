@@ -85,23 +85,24 @@ export async function CreateAccount(prevState: any, formData: FormData) {
     };
 
     const result = await formSchema.safeParseAsync(data);
+
     if (!result.success) {
         return result.error.flatten();
-    }
+    } else {
+        const user = await PRISMA_DB.user.create({
+            data: {
+                email: result.data.email,
+                username: result.data.username,
+                password: result.data.password,
+            },
+            select: {
+                id: true,
+            },
+        });
 
-    const user = await PRISMA_DB.user.create({
-        data: {
-            email: result.data.email,
-            username: result.data.username,
-            password: result.data.password,
-        },
-        select: {
-            id: true,
-        },
-    });
-
-    if (user) {
-        redirect("/login");
+        if (user) {
+            redirect("/login");
+        }
     }
 
     // 계정을 생성했다고 세션을 만들어주면 안됨, 아직 엄밀히 말하면 로그인하기 이전임

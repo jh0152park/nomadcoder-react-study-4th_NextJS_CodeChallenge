@@ -1,9 +1,15 @@
+"use client";
+
+import Link from "next/link";
 import Image from "next/image";
 import Input from "@/components/input";
 import LoadingButton from "@/components/loading-button";
-import Link from "next/link";
+import { useFormState } from "react-dom";
+import { Login } from "./action";
 
-export default function Login() {
+export default function LoginPage() {
+    const [state, trigger] = useFormState(Login, null);
+
     return (
         <div className="flex flex-col items-center justify-start w-full h-full  px-10">
             <Image
@@ -19,26 +25,32 @@ export default function Login() {
             />
             <span className="font-bold text-2xl mb-10">Log In</span>
 
-            <form className="flex flex-col gap-3 ">
+            <form action={trigger} className="flex flex-col gap-3 ">
                 <Input
                     name="email"
                     type="email"
                     placeholder="Email"
                     required
-                    // errors={state?.fieldErrors.email}
+                    errors={state?.fieldErrors.email}
                 />
                 <Input
                     name="password"
                     type="password"
                     placeholder="Password"
                     required
-                    // errors={state?.fieldErrors.password}
+                    errors={state?.fieldErrors.password}
                 />
                 <LoadingButton name="Login" />
             </form>
             <span className="text-sm text-center w-full mt-2">
                 Don't have an accont yet?
-                <Link href="/create-account"> Let's create new one 👻</Link>
+                <Link
+                    href="/create-account"
+                    className=" transition-all hover:text-neutral-300"
+                >
+                    {" "}
+                    Let's create new one 👻
+                </Link>
             </span>
         </div>
     );
