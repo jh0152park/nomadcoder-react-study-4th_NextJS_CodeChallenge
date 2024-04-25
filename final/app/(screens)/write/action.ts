@@ -19,12 +19,17 @@ export async function UploadPost(_: any, formData: FormData) {
         },
     });
 
-    // const user = await PRISMA_DB.user.findMany({
+    // const user = await PRISMA_DB.user.findUnique({
     //     where: {
     //         id: session.id,
+    //     },
+    //     select: {
+    //         Post: true,
+    //         LikePost: true,
     //     },
     // });
 
     // console.log(user);
-    // redirect("/tweet");
+
+    redirect("/tweet");
 }

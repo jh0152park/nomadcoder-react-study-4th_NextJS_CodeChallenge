@@ -1,10 +1,10 @@
 "use client";
 
+import { UploadPost } from "./action";
+import { useFormState } from "react-dom";
 import TextArea from "@/components/text-area";
 import LoadingButton from "@/components/loading-button";
 import BackButton from "@/components/profile/back-button";
-import { useFormState } from "react-dom";
-import { UploadPost } from "./action";
 
 export default function Write() {
     const [_, trigger] = useFormState(UploadPost, null);
