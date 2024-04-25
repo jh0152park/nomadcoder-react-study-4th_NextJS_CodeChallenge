@@ -5,6 +5,9 @@ const nextConfig = {
             {
                 hostname: "pbs.twimg.com",
             },
+            {
+                hostname: "imagedelivery.net",
+            },
         ],
     },
 };

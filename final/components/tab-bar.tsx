@@ -21,8 +21,8 @@ export default function TabBar() {
 
     return (
         <div className="max-w-[430px] w-full h-14 px-7 pb-6 pt-2  fixed bottom-0 flex items-center justify-between *:text-neutral-600 ">
-            <Link href="/posts">
-                {pathname === "/posts" ? (
+            <Link href="/tweet">
+                {pathname === "/tweet" ? (
                     <SolidHomeIcon className="size-7 text-neutral-300" />
                 ) : (
                     <OutlineHomeIcon className="size-7" />
