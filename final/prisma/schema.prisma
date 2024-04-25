@@ -31,7 +31,7 @@ model LikePost {
   updated_at DateTime @updatedAt
 
   posts  Int[] @default([])
-  user   User  @relation(fields: [userId], references: [id])
+  user   User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 }
 
@@ -42,7 +42,7 @@ model Post {
 
   payload String
   like    Int      @default(0)
-  comment String[] @default([""])
+  comment String[]
   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  Int
 }
