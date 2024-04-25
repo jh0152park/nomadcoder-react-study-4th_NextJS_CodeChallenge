@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full py-5">
+        <div className="flex flex-col items-center justify-center w-full h-full p-5">
             <Image
                 src="/image/logo.png"
                 alt="logo"
@@ -18,7 +18,7 @@ export default function Home() {
             <div className="absolute flex flex-col items-center justify-center gap-2 bottom-7">
                 <Link
                     href="/create-account"
-                    className="text-black font-semibold text-lg py-2 w-[350px] bg-[ghostwhite] rounded-xl hover:bg-neutral-300 transition-all text-center"
+                    className="text-black font-semibold text-lg py-2 w-[390px] bg-[ghostwhite] rounded-lg hover:bg-neutral-300 transition-all text-center"
                 >
                     Start
                 </Link>

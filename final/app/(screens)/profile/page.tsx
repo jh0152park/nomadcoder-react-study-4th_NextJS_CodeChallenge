@@ -1,8 +1,9 @@
-import Image from "next/image";
-import BackButton from "@/components/profile/back-button";
-import getSession from "@/lib/session/get-session";
-import PRISMA_DB from "@/lib/db/prisma-db";
 import Link from "next/link";
+import Image from "next/image";
+import { redirect } from "next/navigation";
+import PRISMA_DB from "@/lib/db/prisma-db";
+import getSession from "@/lib/session/get-session";
+import BackButton from "@/components/profile/back-button";
 
 export default async function Profile() {
     const session = await getSession();
@@ -19,8 +20,15 @@ export default async function Profile() {
         },
     });
 
+    async function logOut() {
+        "use server";
+        const session = await getSession();
+        session.destroy();
+        redirect("/");
+    }
+
     return (
-        <div className="w-full max-w-[430px] h-screen flex flex-col items-start">
+        <div className="w-full max-w-[430px] h-screen py-5 flex flex-col items-start">
             <div className="flex flex-col items-start w-full px-5">
                 <BackButton />
                 <div className="flex items-center justify-between w-full mt-10">
@@ -45,12 +53,23 @@ export default async function Profile() {
                     {user?.description}
                 </span>
 
-                <Link
-                    href="/profile/edit"
-                    className="w-full mt-5  py-1.5 border rounded-lg border-neutral-500 hover:bg-neutral-950 transition-all text-center"
+                <form
+                    action={logOut}
+                    className="flex items-center justify-center w-full gap-2"
                 >
-                    Edit profile
-                </Link>
+                    <Link
+                        href="/profile/edit"
+                        className="w-full py-2 mt-5 text-center transition-all border rounded-lg border-neutral-500 hover:bg-neutral-950"
+                    >
+                        Edit profile
+                    </Link>
+                    <button
+                        type="submit"
+                        className="w-full py-2 mt-5 text-center transition-all border rounded-lg border-neutral-500 hover:bg-neutral-950"
+                    >
+                        Log out
+                    </button>
+                </form>
             </div>
 
             <div className="w-full pb-2 mt-12 text-center border-b-2 border-neutral-500">

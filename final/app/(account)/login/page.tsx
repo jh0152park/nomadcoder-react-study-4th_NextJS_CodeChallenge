@@ -11,7 +11,7 @@ export default function LoginPage() {
     const [state, trigger] = useFormState(Login, null);
 
     return (
-        <div className="flex flex-col items-center justify-start w-full h-full  px-10">
+        <div className="flex flex-col items-center justify-start w-full h-full px-10">
             <Image
                 src="/image/logo.png"
                 alt="logo"
@@ -23,7 +23,7 @@ export default function LoginPage() {
                     height: "auto",
                 }}
             />
-            <span className="font-bold text-2xl mb-10">Log In</span>
+            <span className="mb-16 text-2xl font-bold">Log In</span>
 
             <form action={trigger} className="flex flex-col gap-3 ">
                 <Input
@@ -42,11 +42,11 @@ export default function LoginPage() {
                 />
                 <LoadingButton name="Login" />
             </form>
-            <span className="text-sm text-center w-full mt-2">
+            <span className="w-full mt-2 text-sm text-center">
                 Don't have an accont yet?
                 <Link
                     href="/create-account"
-                    className=" transition-all hover:text-neutral-300"
+                    className="transition-all  hover:text-neutral-300"
                 >
                     {" "}
                     Let's create new one 👻

@@ -23,7 +23,7 @@ export default function CreateAccountPage() {
                 }}
             />
 
-            <span className="font-bold text-2xl mb-10">Create Account</span>
+            <span className="mb-16 text-2xl font-bold">Create Account</span>
 
             <form action={trigger} className="flex flex-col gap-3 ">
                 <Input
@@ -49,7 +49,7 @@ export default function CreateAccountPage() {
                 />
                 <LoadingButton name="Create" />
             </form>
-            <span className="text-sm text-center w-full mt-2">
+            <span className="w-full mt-2 text-sm text-center">
                 Will be redirect to login page if account created 😎
             </span>
         </div>

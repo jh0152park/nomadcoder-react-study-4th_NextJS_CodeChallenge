@@ -5,17 +5,17 @@ interface IInput {
     errors?: string[];
 }
 
-export default function Input({
+export default function TextArea({
     name,
     errors = [],
     ...extraProps
-}: IInput & InputHTMLAttributes<HTMLInputElement>) {
+}: IInput & InputHTMLAttributes<HTMLTextAreaElement>) {
     return (
         <div className="flex flex-col gap-2">
-            <input
+            <textarea
                 name={name}
                 {...extraProps}
-                className="w-[390px] px-3 py-2 rounded-lg bg-black border text-[ghostwhite] placeholder:text-neutral-500 active:outline-none focus:outline-none font-semibold placeholder:font-semibold "
+                className="w-[390px] px-3 py-2 h-20 rounded-lg bg-black border text-[ghostwhite] placeholder:text-neutral-500 active:outline-none focus:outline-none font-semibold placeholder:font-semibold resize-none"
             />
             {errors.map((error, index) => (
                 <span key={index} className="font-medium text-red-500">

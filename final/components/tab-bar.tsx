@@ -20,7 +20,7 @@ export default function TabBar() {
     const pathname = usePathname();
 
     return (
-        <div className="max-w-[430px] w-full h-14 px-7 pb-5 pt-2  fixed bottom-0 flex items-center justify-between *:text-neutral-600 ">
+        <div className="max-w-[430px] w-full h-14 px-7 pb-6 pt-2  fixed bottom-0 flex items-center justify-between *:text-neutral-600 ">
             <Link href="/posts">
                 {pathname === "/posts" ? (
                     <SolidHomeIcon className="size-7 text-neutral-300" />
