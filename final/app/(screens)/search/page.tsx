@@ -1,3 +1,3 @@
 export default function Messages() {
-    return <h1>Messages Page</h1>;
+    return <h1>Search Page</h1>;
 }

@@ -5,6 +5,7 @@ import {
     PencilSquareIcon as SolidPostIcon,
     HomeIcon as SolidHomeIcon,
     UserIcon as SolidUserIcon,
+    MagnifyingGlassIcon as SolidSearchIcon,
 } from "@heroicons/react/24/solid";
 import {
     ChatBubbleOvalLeftIcon as OutlineMessageIcon,
@@ -12,6 +13,7 @@ import {
     PencilSquareIcon as OutlinePostIcon,
     HomeIcon as OutlineHomeIcon,
     UserIcon as OutlineUserIcon,
+    MagnifyingGlassIcon as OutlineSearchIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -31,11 +33,11 @@ export default function TabBar() {
                     <OutlineHomeIcon className="size-7" />
                 )}
             </Link>
-            <Link href="/messages">
-                {pathname === "/messages" ? (
-                    <SolidMessageIcon className="size-7 text-neutral-300" />
+            <Link href="/search">
+                {pathname === "/search" ? (
+                    <SolidSearchIcon className="size-7 text-neutral-300" />
                 ) : (
-                    <OutlineMessageIcon className="size-7" />
+                    <OutlineSearchIcon className="size-7" />
                 )}
             </Link>
             <Link href="/write">
