@@ -1,7 +1,8 @@
 import Image from "next/image";
+import MoreButton from "./more-button";
 import getSession from "@/lib/session/get-session";
 import { DEFAULT_PROFILE_PHOTO } from "@/lib/project-common";
-import MoreButton from "./more-button";
+import ActionButton from "./action-button";
 
 interface IPost {
     id: number;
@@ -27,7 +28,7 @@ export default async function PostSummary({
     const session = await getSession();
 
     return (
-        <div className="w-full max-w-[430px] flex items-start justify-start p-4 border ">
+        <div className="flex items-start justify-start w-full p-4 max-w-[430px]  hover:bg-neutral-900 transition-all duration-200 hover:cursor-pointer rounded-md">
             <div className="overflow-hidden rounded-full size-[50px] mr-5">
                 <Image
                     src={
@@ -52,6 +53,8 @@ export default async function PostSummary({
                     {userId === session.id && <MoreButton id={id} />}
                 </div>
                 <span className="text-sm font-extralight">{payload}</span>
+
+                <ActionButton likeCount={like} id={id} userId={userId} />
             </div>
         </div>
     );
