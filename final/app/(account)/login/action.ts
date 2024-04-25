@@ -41,7 +41,7 @@ export async function Login(prevState: any, formData: FormData) {
 
         if (user!.password === result.data.password) {
             await UpdateSession(user!.id);
-            redirect("/posts");
+            redirect("/tweet");
         } else {
             return {
                 fieldErrors: {
