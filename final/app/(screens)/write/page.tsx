@@ -21,7 +21,7 @@ export default function Write() {
                 <TextArea
                     name="post"
                     h="150"
-                    placeholder="What is happening? 😎 🌈 ✨ 👻 🍩"
+                    placeholder="What is going on!? 😎 🌈 ✨ 👻 🍩"
                     required
                 />
                 <LoadingButton name="Post" />

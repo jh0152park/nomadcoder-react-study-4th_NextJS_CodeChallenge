@@ -64,7 +64,7 @@ export default async function Profile() {
 
                 <form
                     action={logOut}
-                    className="flex items-center justify-center w-full gap-2"
+                    className="flex items-center justify-center w-full gap-3"
                 >
                     <Link
                         href="/profile/edit"
