@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import PRISMA_DB from "@/lib/db/prisma-db";
 import getSession from "@/lib/session/get-session";
 import BackButton from "@/components/profile/back-button";
+import { DEFAULT_PROFILE_PHOTO } from "@/lib/project-common";
 
 export default async function Profile() {
     const session = await getSession();
@@ -33,7 +34,7 @@ export default async function Profile() {
                 <BackButton />
                 <div className="flex items-center justify-between w-full mt-10">
                     <div className="flex flex-col items-start justify-center">
-                        <span className="text-4xl font-bold">
+                        <span className="text-3xl font-bold">
                             🌈 {user?.username} ✨
                         </span>
                         <span className="mb-5 text-lg font-semibold">
@@ -41,16 +42,24 @@ export default async function Profile() {
                         </span>
                     </div>
                     <Image
-                        src={user?.profile_image!}
+                        src={
+                            user?.profile_image! === DEFAULT_PROFILE_PHOTO
+                                ? user?.profile_image!
+                                : `${user?.profile_image}/public`
+                        }
                         alt={user?.username!}
-                        width="70"
-                        height="70"
-                        className="rounded-full"
+                        width="90"
+                        height="90"
+                        className="rounded-full size-[90px]"
+                        style={{
+                            width: "90px",
+                            height: "90px",
+                        }}
                     />
                 </div>
 
                 <span className="w-[90%] h-14 font-extralight text-md ">
-                    {user?.description}
+                    {user?.description.slice(0, 80)}
                 </span>
 
                 <form
