@@ -47,12 +47,25 @@ export default function ActionButton({
     async function toggleHeart() {
         if (data?.like) {
             // currently already like
+            mutate(
+                {
+                    like: !data?.like,
+                    count: data?.count! - 1 > 0 ? data?.count! - 1 : 0,
+                },
+                false
+            );
             await DecreaseLike(id, likeCount, userId);
         } else {
             // currently not like
+            mutate(
+                {
+                    like: !data?.like,
+                    count: data?.count! + 1,
+                },
+                false
+            );
             await IncreaseLike(id, likeCount, userId);
         }
-        mutate({ like: !data?.like }, false);
     }
 
     return (
@@ -80,7 +93,7 @@ export default function ActionButton({
                 />
             </div>
             <span className="mt-2 text-sm text-neutral-400">
-                {data?.like ? likeCount + 1 : likeCount} likes
+                {data?.count} likes
             </span>
         </div>
     );

@@ -46,8 +46,18 @@ export async function IsAlreadyLike(id: number, uid: number) {
         },
     });
 
+    const post = await PRISMA_DB.post.findUnique({
+        where: {
+            id: id,
+        },
+        select: {
+            like: true,
+        },
+    });
+
     return {
         like: user?.likePost.includes(id),
+        count: post?.like,
     };
 }
 
