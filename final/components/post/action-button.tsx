@@ -41,9 +41,6 @@ export default function ActionButton({
         }
     );
 
-    console.log(id);
-    console.log(data);
-
     async function toggleHeart() {
         if (data?.like) {
             // currently already like

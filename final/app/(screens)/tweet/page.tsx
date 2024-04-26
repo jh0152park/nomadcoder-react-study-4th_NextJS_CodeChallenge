@@ -47,6 +47,7 @@ export default async function Posts() {
             {posts.map((post) => (
                 <PostSummary key={post.id} {...post} />
             ))}
+            <div className="w-full mb-32" />
         </div>
     );
 }
