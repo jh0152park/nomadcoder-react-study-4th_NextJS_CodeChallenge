@@ -1,14 +1,37 @@
 "use server";
 
 import PRISMA_DB from "@/lib/db/prisma-db";
+import getSession from "@/lib/session/get-session";
 import { redirect } from "next/navigation";
 
 export async function DeletePost(id: number) {
+    const session = await getSession();
     await PRISMA_DB.post.delete({
         where: {
             id: id,
         },
     });
+
+    const user = await PRISMA_DB.user.findUnique({
+        where: {
+            id: session.id,
+        },
+        select: {
+            likePost: true,
+        },
+    });
+
+    const newLikeList = user?.likePost.filter((pid) => pid !== id);
+
+    await PRISMA_DB.user.update({
+        where: {
+            id: session.id,
+        },
+        data: {
+            likePost: newLikeList,
+        },
+    });
+
     redirect("/tweet");
 }
 
@@ -91,7 +114,7 @@ export async function DeleteLikeList(id: number, uid: number) {
         },
     });
 
-    const newLikeList = user?.likePost.filter((lid) => lid !== id);
+    const newLikeList = user?.likePost.filter((pid) => pid !== id);
 
     await PRISMA_DB.user.update({
         where: {

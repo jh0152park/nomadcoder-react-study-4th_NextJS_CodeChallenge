@@ -15,6 +15,7 @@ import {
     IncreaseLike,
     IsAlreadyLike,
 } from "@/app/(screens)/tweet/action";
+import { useRouter } from "next/navigation";
 
 async function mockingAPI(id: number, userId: number) {
     return await IsAlreadyLike(id, userId);
@@ -29,6 +30,7 @@ export default function ActionButton({
     userId: number;
     likeCount: number;
 }) {
+    const router = useRouter();
     const [share, setShare] = useState(false);
     const [message, setMessage] = useState(false);
 
@@ -36,7 +38,7 @@ export default function ActionButton({
         `like_${id}`,
         () => mockingAPI(id, userId),
         {
-            revalidateIfStale: false,
+            revalidateIfStale: true,
             revalidateOnFocus: false,
         }
     );
@@ -44,25 +46,26 @@ export default function ActionButton({
     async function toggleHeart() {
         if (data?.like) {
             // currently already like
+            await DecreaseLike(id, likeCount, userId);
             mutate(
                 {
                     like: !data?.like,
                     count: data?.count! - 1 > 0 ? data?.count! - 1 : 0,
                 },
-                false
+                true
             );
-            await DecreaseLike(id, likeCount, userId);
         } else {
             // currently not like
+            await IncreaseLike(id, likeCount, userId);
             mutate(
                 {
                     like: !data?.like,
                     count: data?.count! + 1,
                 },
-                false
+                true
             );
-            await IncreaseLike(id, likeCount, userId);
         }
+        router.refresh();
     }
 
     return (

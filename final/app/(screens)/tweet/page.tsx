@@ -1,3 +1,4 @@
+import MBBuffer from "@/components/post/mb-buffer";
 import PostSummary from "@/components/post/post-summary";
 import PRISMA_DB from "@/lib/db/prisma-db";
 import Image from "next/image";
@@ -47,7 +48,7 @@ export default async function Posts() {
             {posts.map((post) => (
                 <PostSummary key={post.id} {...post} />
             ))}
-            <div className="w-full mb-32" />
+            <MBBuffer mb="32" />
         </div>
     );
 }
