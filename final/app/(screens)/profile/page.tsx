@@ -5,9 +5,36 @@ import PRISMA_DB from "@/lib/db/prisma-db";
 import getSession from "@/lib/session/get-session";
 import BackButton from "@/components/profile/back-button";
 import { DEFAULT_PROFILE_PHOTO } from "@/lib/project-common";
+import PostSummary from "@/components/post/post-summary";
+import MBBuffer from "@/components/post/mb-buffer";
+
+async function getAllMyPosts(uid: number) {
+    const posts = await PRISMA_DB.post.findMany({
+        orderBy: {
+            created_at: "desc",
+        },
+        select: {
+            id: true,
+            like: true,
+            userId: true,
+            payload: true,
+            comment: true,
+            user: {
+                select: {
+                    id: true,
+                    username: true,
+                    profile_image: true,
+                },
+            },
+        },
+    });
+
+    return posts.filter((post) => post.userId === uid);
+}
 
 export default async function Profile() {
     const session = await getSession();
+    const myPosts = await getAllMyPosts(session.id!);
 
     const user = await PRISMA_DB.user.findUnique({
         where: {
@@ -83,6 +110,11 @@ export default async function Profile() {
 
             <div className="w-full pb-2 mt-12 text-center border-b-2 border-neutral-500">
                 Threads
+            </div>
+            <div className="w-full h-[60%] overflow-y-scroll   pb-10">
+                {myPosts.map((post) => (
+                    <PostSummary key={post.id} {...post} />
+                ))}
             </div>
         </div>
     );
