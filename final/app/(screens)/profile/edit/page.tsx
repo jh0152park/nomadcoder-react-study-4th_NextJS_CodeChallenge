@@ -30,8 +30,10 @@ export default function EditProfile() {
     }
 
     return (
-        <div className="relative flex flex-col items-start justify-start w-full h-screen p-5 ">
-            <BackButton />
+        <div className="relative flex flex-col items-start justify-start w-full h-screen p-5 mb-32">
+            <div>
+                <BackButton />
+            </div>
 
             <span className="absolute text-xl font-bold -translate-x-1/2 left-1/2 top-5">
                 Edit Profile

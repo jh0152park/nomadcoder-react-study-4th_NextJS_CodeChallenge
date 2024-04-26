@@ -43,6 +43,7 @@ export default async function PostSummary({
                         width: "50px",
                         height: "50px",
                     }}
+                    priority={true}
                 />
             </div>
             <div className="flex flex-col items-start w-[320px]">
@@ -54,7 +55,7 @@ export default async function PostSummary({
                 </div>
                 <span className="text-sm font-extralight">{payload}</span>
 
-                <ActionButton likeCount={like} id={id} userId={userId} />
+                <ActionButton likeCount={like} id={id} userId={session.id!} />
             </div>
         </div>
     );

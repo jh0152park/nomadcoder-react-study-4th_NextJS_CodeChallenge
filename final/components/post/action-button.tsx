@@ -15,8 +15,9 @@ import {
     IncreaseLike,
     IsAlreadyLike,
 } from "@/app/(screens)/tweet/action";
+import { useRouter } from "next/navigation";
 
-async function mockingAPI(id: number, userId: number) {
+async function getPostLike(id: number, userId: number) {
     return await IsAlreadyLike(id, userId);
 }
 
@@ -29,30 +30,42 @@ export default function ActionButton({
     userId: number;
     likeCount: number;
 }) {
+    const router = useRouter();
     const [share, setShare] = useState(false);
     const [message, setMessage] = useState(false);
 
     const { data, mutate } = useSWR(
         `like_${id}`,
-        () => mockingAPI(id, userId),
+        () => getPostLike(id, userId),
         {
-            revalidateIfStale: false,
+            revalidateIfStale: true,
             revalidateOnFocus: false,
         }
     );
-
-    console.log(id);
-    console.log(data);
 
     async function toggleHeart() {
         if (data?.like) {
             // currently already like
             await DecreaseLike(id, likeCount, userId);
+            mutate(
+                {
+                    like: !data?.like,
+                    count: data?.count! - 1 > 0 ? data?.count! - 1 : 0,
+                },
+                true
+            );
         } else {
             // currently not like
             await IncreaseLike(id, likeCount, userId);
+            mutate(
+                {
+                    like: !data?.like,
+                    count: data?.count! + 1,
+                },
+                true
+            );
         }
-        mutate({ like: !data?.like }, false);
+        router.refresh();
     }
 
     return (
@@ -80,7 +93,7 @@ export default function ActionButton({
                 />
             </div>
             <span className="mt-2 text-sm text-neutral-400">
-                {data?.like ? likeCount + 1 : likeCount} likes
+                {data?.count} likes
             </span>
         </div>
     );
