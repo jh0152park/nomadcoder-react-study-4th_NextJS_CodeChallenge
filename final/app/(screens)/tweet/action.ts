@@ -21,6 +21,7 @@ export async function IncreaseLike(id: number, like: number, uid: number) {
             like: like + 1,
         },
     });
+    await AddLikeList(id, uid);
 }
 
 export async function DecreaseLike(id: number, like: number, uid: number) {
@@ -32,6 +33,7 @@ export async function DecreaseLike(id: number, like: number, uid: number) {
             like: like - 1 > 0 ? like - 1 : 0,
         },
     });
+    await DeleteLikeList(id, uid);
 }
 
 export async function IsAlreadyLike(id: number, uid: number) {
@@ -47,4 +49,46 @@ export async function IsAlreadyLike(id: number, uid: number) {
     return {
         like: user?.likePost.includes(id),
     };
+}
+
+export async function AddLikeList(id: number, uid: number) {
+    const user = await PRISMA_DB.user.findUnique({
+        where: {
+            id: uid,
+        },
+        select: {
+            likePost: true,
+        },
+    });
+
+    await PRISMA_DB.user.update({
+        where: {
+            id: uid,
+        },
+        data: {
+            likePost: [...user?.likePost!, id],
+        },
+    });
+}
+
+export async function DeleteLikeList(id: number, uid: number) {
+    const user = await PRISMA_DB.user.findUnique({
+        where: {
+            id: uid,
+        },
+        select: {
+            likePost: true,
+        },
+    });
+
+    const newLikeList = user?.likePost.filter((lid) => lid !== id);
+
+    await PRISMA_DB.user.update({
+        where: {
+            id: uid,
+        },
+        data: {
+            likePost: newLikeList,
+        },
+    });
 }
