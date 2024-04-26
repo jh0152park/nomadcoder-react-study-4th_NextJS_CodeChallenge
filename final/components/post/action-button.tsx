@@ -17,7 +17,7 @@ import {
 } from "@/app/(screens)/tweet/action";
 import { useRouter } from "next/navigation";
 
-async function mockingAPI(id: number, userId: number) {
+async function getPostLike(id: number, userId: number) {
     return await IsAlreadyLike(id, userId);
 }
 
@@ -36,7 +36,7 @@ export default function ActionButton({
 
     const { data, mutate } = useSWR(
         `like_${id}`,
-        () => mockingAPI(id, userId),
+        () => getPostLike(id, userId),
         {
             revalidateIfStale: true,
             revalidateOnFocus: false,
