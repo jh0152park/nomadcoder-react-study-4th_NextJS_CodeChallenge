@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { DeletePost } from "@/app/(screens)/tweet/action";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 export default function MoreButton({ id }: { id: number }) {
     const [open, setOpen] = useState(false);
@@ -13,17 +14,35 @@ export default function MoreButton({ id }: { id: number }) {
                 className="w-5 hover:cursor-pointer"
                 onClick={() => setOpen((prev) => !prev)}
             />
-            <form action={() => DeletePost(id)}>
-                <button
-                    className="absolute top-0 px-2 py-1 text-sm transition-all bg-red-500 rounded-md cursor-pointer -left-16"
-                    style={{
-                        display: open ? "block" : "none",
-                    }}
-                    type="submit"
-                >
-                    Delete
-                </button>
-            </form>
+            <div
+                className="absolute top-0 *:text-[11px] transition-all  cursor-pointer -left-24 *:font-semibold"
+                style={{
+                    display: open ? "block" : "none",
+                }}
+            >
+                <div className="flex items-start justify-center gap-2  *:transition-all *:duration-200">
+                    <Link
+                        href={`/edit/${id}`}
+                        className="px-1.5 py-1 border rounded-md border-neutral-500 hover:bg-neutral-700"
+                    >
+                        Edit
+                    </Link>
+
+                    <form
+                        action={() => {
+                            setOpen(false);
+                            DeletePost(id);
+                        }}
+                    >
+                        <button
+                            type="submit"
+                            className="px-1.5 py-1 border rounded-md border-neutral-500 hover:bg-neutral-700"
+                        >
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 }
