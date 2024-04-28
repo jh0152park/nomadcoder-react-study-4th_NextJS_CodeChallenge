@@ -113,7 +113,11 @@ export default async function Profile() {
             </div>
             <div className="w-full h-[60%] overflow-y-scroll   pb-10">
                 {myPosts.map((post) => (
-                    <PostSummary key={post.id} {...post} />
+                    <PostSummary
+                        key={post.id}
+                        {...post}
+                        sessionId={session.id!}
+                    />
                 ))}
             </div>
         </div>

@@ -31,8 +31,20 @@ export default function PostSummary({
     const router = useRouter();
 
     function onPostClick(event: any) {
-        if (!event.target.className.toString().includes("SVG"))
+        if (
+            event.target.textContent === "Edit" ||
+            event.target.textContent === "Delete"
+        ) {
+            //
+        } else if (!event.target.className.toString().includes("SVG"))
             router.push(`/tweet/${id}`);
+        else return;
+        // if (
+        //     event.target.textContent === "Edit" ||
+        //     event.target.textContent === "Delete"
+        // ) {
+        //     return;
+        // }
     }
 
     return (
