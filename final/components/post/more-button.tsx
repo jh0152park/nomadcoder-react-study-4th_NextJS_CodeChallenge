@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { redirect } from "next/navigation";
 import { DeletePost } from "@/app/(screens)/tweet/action";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
@@ -9,7 +10,7 @@ export default function MoreButton({ id }: { id: number }) {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="relative">
+        <div className="relative" id="more-button">
             <EllipsisHorizontalIcon
                 className="w-5 hover:cursor-pointer"
                 onClick={() => setOpen((prev) => !prev)}

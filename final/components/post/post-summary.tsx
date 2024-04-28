@@ -1,8 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import MoreButton from "./more-button";
-import getSession from "@/lib/session/get-session";
-import { DEFAULT_PROFILE_PHOTO } from "@/lib/project-common";
 import ActionButton from "./action-button";
+import { DEFAULT_PROFILE_PHOTO } from "@/lib/project-common";
+import { useRouter } from "next/navigation";
 
 interface IPost {
     id: number;
@@ -15,20 +17,41 @@ interface IPost {
     like: number;
     comment: string[];
     userId: number;
+    sessionId: number;
 }
 
-export default async function PostSummary({
+export default function PostSummary({
     id,
     user,
     like,
     userId,
     payload,
-    comment,
+    sessionId,
 }: IPost) {
-    const session = await getSession();
+    const router = useRouter();
+
+    function onPostClick(event: any) {
+        if (
+            event.target.textContent === "Edit" ||
+            event.target.textContent === "Delete"
+        ) {
+            //
+        } else if (!event.target.className.toString().includes("SVG"))
+            router.push(`/tweet/${id}`);
+        else return;
+        // if (
+        //     event.target.textContent === "Edit" ||
+        //     event.target.textContent === "Delete"
+        // ) {
+        //     return;
+        // }
+    }
 
     return (
-        <div className="flex items-start justify-start w-full p-4 max-w-[430px]  hover:bg-neutral-900 transition-all duration-200 hover:cursor-pointer rounded-md">
+        <div
+            className="flex items-start justify-start w-full p-4 max-w-[430px] hover:bg-neutral-900 transition-all duration-200 hover:cursor-pointer rounded-md relative"
+            onClick={onPostClick}
+        >
             <div className="overflow-hidden rounded-full size-[50px] mr-5">
                 <Image
                     src={
@@ -51,11 +74,11 @@ export default async function PostSummary({
                     <span className="text-[12px] font-semibold">
                         {user.username}
                     </span>
-                    {userId === session.id && <MoreButton id={id} />}
+                    {userId === sessionId && <MoreButton id={id} />}
                 </div>
                 <span className="text-sm font-extralight">{payload}</span>
 
-                <ActionButton likeCount={like} id={id} userId={session.id!} />
+                <ActionButton likeCount={like} id={id} userId={sessionId} />
             </div>
         </div>
     );
