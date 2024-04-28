@@ -69,7 +69,7 @@ export default function ActionButton({
     }
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col" id="action-button">
             <div className="flex items-center justify-start gap-2 mt-3">
                 {data?.like ? (
                     <SolidHeartIcon
